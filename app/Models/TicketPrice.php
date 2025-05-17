@@ -12,4 +12,9 @@ class TicketPrice extends Model
     {
         return $this->belongsTo(Park::class);
     }
+
+    public function ticketType()
+    {
+        return $this->belongsTo(TicketType::class);
+    }
 }

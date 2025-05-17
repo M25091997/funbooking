@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -54,5 +55,10 @@ class HomeController extends Controller
         $review->status = $request->status;
         $review->save();
         return response()->json(['status' => true, 'message' => 'Status updated successfully']);
+    }
+    public function CheckoutFun(Request $request, $orderId)
+    {
+        $booking = Booking::where('order_id', $orderId)->first();
+        return view("website.checkout", compact('booking'));
     }
 }

@@ -359,7 +359,7 @@ return [
         [
             'text' => 'Subscription',
             'icon' => 'fa fa-fw fa-key',
-            'submenu' => [               
+            'submenu' => [
                 [
                     'text' => 'Benefits',
                     'url' => 'admin/subscriptionBenefit',
@@ -400,16 +400,16 @@ return [
                     'text' => 'Guest Customers',
                     'url' => 'admin/customers',
                     'can' => ['manage-customers'],
-                    
+
                 ],
 
                 [
                     'text' => 'Support Ticket',
                     'url' => 'admin/support_ticket',
                     'can' => ['manage-support-ticket'],
-                    
+
                 ],
-                
+
                 [
                     'text' => 'Subscription',
                     'url' => 'admin/subscription',
@@ -420,14 +420,19 @@ return [
                     'url' => 'admin/user_notification',
                     'can' => 'manage-notification'
                 ],
-               
+
+                [
+                    'text' => 'Ticket Booking',
+                    'url' => 'admin/ticket-booking',
+                ],
+
 
             ]
         ],
         [
             'text' => 'Web Manage',
             'icon' => 'fa fa-desktop',
-            'submenu' => [              
+            'submenu' => [
 
                 [
                     'text' => 'Support Type',
@@ -438,14 +443,14 @@ return [
                     'text' => 'Banner Image',
                     'url' => 'admin/bannerimages ',
                     'can' => ['manage-banner-image'],
-                    
+
                 ],
-              
+
                 [
                     'text' => 'Testimonials',
                     'url' => 'admin/testimonials',
                     'can' => ['manage-web-testimonials'],
-                ], 
+                ],
                 [
                     'text' => 'FAQs',
                     'url' => 'admin/faq',

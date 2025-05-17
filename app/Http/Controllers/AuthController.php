@@ -117,4 +117,40 @@ class AuthController extends Controller
 
         return redirect()->back()->with('success', 'Customer deleted successfully');
     }
+
+
+    public function update(Request $request, $id)
+    {
+        if (auth()->id() != $id) {
+            abort(403); // Forbidden
+        }
+
+        // Validate input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'city' => 'nullable',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:6048',
+            // Add other fields as needed
+        ], [
+            'image.image' => 'The file must be an image.',
+            'image.mimes' => 'Only JPG, JPEG, PNG, and WEBP formats are allowed.',
+            'image.max' => 'The image size must not exceed 6 MB.',
+        ]);
+
+        // Find and update user
+        $user = User::findOrFail($id);
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('customer/profile_image', 'public');
+            $user->profile_image =  $path;
+        }
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->city = $request->city;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Profile updated successfully.');
+    }
 }

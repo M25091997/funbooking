@@ -7,7 +7,7 @@
                   <div class="footer-head">
                      <!-- <h4>Funbook</h4> -->
                      <a href="index.php">
-                     <img src="./images/fun-book-logo.png" alt="company logo">
+                     <img src="{{asset('images/fun-book-logo.png')}}" alt="company logo">
                      </a>
                   </div>
                   <div class="footer-content">
@@ -78,9 +78,9 @@
                   </div>
                   <div class="footer-content">
                      <p>
-                        Subscribe our newsletter to get more free details about funbook karo
+                        Subsrcibe our newsletter to get more free details about funbook karo
                      </p>
-                     <div class="subscribe-input">
+                     <div class="subsrcibe-input">
                         <input type="text" placeholder="Enter Email" class="form-control"/>
                         <div class="email-icon">
                            <i class="fa-regular fa-envelope"></i>
@@ -99,22 +99,22 @@
                   <div class="footer-content">
                      <div class="row">
                         <div class="col-4 p-1">
-                           <img src="./images/book-1.webp" alt="book">
+                           <img src="{{asset('images/book-1.webp')}}" alt="book">
                         </div>
                         <div class="col-4 p-1">
-                           <img src="./images/book-2.webp" alt="book">
+                           <img src="{{asset('images/book-2.webp')}}" alt="book">
                         </div>
                         <div class="col-4 p-1">
-                           <img src="./images/book-3.webp" alt="book">
+                           <img src="{{asset('images/book-3.webp')}}" alt="book">
                         </div>
                         <div class="col-4 p-1">
-                           <img src="./images/book-4.webp" alt="book">
+                           <img src="{{asset('images/book-4.webp')}}" alt="book">
                         </div>
                         <div class="col-4 p-1">
-                           <img src="./images/book-1.webp" alt="book">
+                           <img src="{{asset('images/book-1.webp')}}" alt="book">
                         </div>
                         <div class="col-4 p-1">
-                           <img src="./images/book-3.webp" alt="book">
+                           <img src="{{asset('images/book-3.webp')}}" alt="book">
                         </div>
                      </div>
                   </div>
@@ -122,27 +122,27 @@
                      <ul>
                         <li>
                            <a href="#">
-                           <img src="./images/visa-card.png" alt="payment card">
+                           <img src="{{asset('/images/visa-card.png')}}" alt="payment card">
                            </a>
                         </li>
                         <li>
                            <a href="#">
-                           <img src="./images/paypal-card.png" alt="payment card">
+                           <img src="{{asset('/images/paypal-card.png')}}" alt="payment card">
                            </a>
                         </li>
                         <li>
                            <a href="#">
-                           <img src="./images/express-card.png" alt="payment card">
+                           <img src="{{asset('/images/express-card.png')}}" alt="payment card">
                            </a>
                         </li>
                         <li>
                            <a href="#">
-                           <img src="./images/discover-card.png" alt="payment card">
+                           <img src="{{asset('/images/discover-card.png')}}" alt="payment card">
                            </a>
                         </li>
                         <li>
                            <a href="#">
-                           <img src="./images/master-card.png" alt="payment card">
+                           <img src="{{asset('/images/master-card.png')}}" alt="payment card">
                            </a>
                         </li>
                      </ul>

@@ -213,37 +213,111 @@ responsive: {
   }
 }
 });
-// number
-$(function() {
-$('[data-decrease]').click(decrease);
-$('[data-increase]').click(increase);
-$('[data-value]').change(valueChange);
-});
+// // number
+// $(function() {
+// $('[data-decrease]').click(decrease);
+// $('[data-increase]').click(increase);
+// $('[data-value]').change(valueChange);
+// });
 
-function decrease() {
-var value = $(this).parent().find('[data-value]').val();
-if(value > 1) {
-  value--;
-  $(this).parent().find('[data-value]').val(value);
-}
-}
+// function decrease() {
+// var value = $(this).parent().find('[data-value]').val();
+// if(value > 1) {
+//   value--;
+//   $(this).parent().find('[data-value]').val(value);
+// }
+// }
 
-function increase() {
-var value = $(this).parent().find('[data-value]').val();
-if(value < 100) {
-  value++;
-  $(this).parent().find('[data-value]').val(value);
-}
-}
+// function increase() {
+// var value = $(this).parent().find('[data-value]').val();
+// if(value < 100) {
+//   value++;
+//   $(this).parent().find('[data-value]').val(value);
+// }
+// }
 
-function valueChange() {
-var value = $(this).val();
-if(value == undefined || isNaN(value) == true || value <= 0) {
-  $(this).val(1);
-} else if(value >= 101) {
-  $(this).val(100);
-}
-}
+// function valueChange() {
+// var value = $(this).val();
+// if(value == undefined || isNaN(value) == true || value <= 0) {
+//   $(this).val(1);
+// } else if(value >= 101) {
+//   $(this).val(100);
+// }
+// }
+
+
+ $(function () {
+        // Handle increase button
+        $('[data-increase]').click(function () {
+            let input = $(this).closest('.d-flex').find('[data-value]');
+            let value = parseInt(input.val()) || 0;
+
+            if (value < 50) {
+                input.val(value + 1);
+            }
+
+            calculateTotal();
+        });
+
+        // Handle decrease button
+        $('[data-decrease]').click(function () {
+            let input = $(this).closest('.d-flex').find('[data-value]');
+            let value = parseInt(input.val()) || 1;
+
+            if (value > 0) {
+                input.val(value - 1);
+            }
+
+            calculateTotal();
+        });
+
+        // Handle manual input change
+        $('[data-value]').on('change keyup', function () {
+            let value = parseInt($(this).val());
+
+            if (isNaN(value) || value < 1) {
+                $(this).val(1);
+            } else if (value > 100) {
+                $(this).val(100);
+            }
+
+            calculateTotal();
+        });
+
+        // Initial total calculation
+        calculateTotal();
+    });
+
+    // Calculate total price and MRP
+    function calculateTotal() {
+        let totalPrice = 0;
+        let totalMrp = 0;
+
+        $('[data-value]').each(function () {
+            let quantity = parseInt($(this).val()) || 0;
+            let price = parseFloat($(this).data('price')) || 0;
+            let mrp = parseFloat($(this).data('mrp')) || 0;
+
+            totalPrice += quantity * price;
+            totalMrp += quantity * mrp;
+        });
+
+            //value 
+           let totalSave = totalMrp - totalPrice;
+            let totalDiscount = totalMrp > 0 ? (totalSave / totalMrp) * 100 : 0;
+            totalDiscount = totalDiscount.toFixed(2);
+
+        $('#totalPrice').text(totalPrice.toFixed(2));
+        $('#totalmrp').text(totalMrp.toFixed(2));
+
+           // Optional: show savings and discount percentage
+        $('#totalValue').text('₹' + totalPrice.toFixed(2));   
+        $('#totalSave').text( '₹' + totalSave.toFixed(2));
+        $('#totalDiscount').text(totalDiscount + '%');
+    }
+
+
+
 
 function toggleNotifications() {
   var notificationList = document.getElementById("notificationList");

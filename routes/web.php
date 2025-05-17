@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\RoleAndPermissionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BannerimagesController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DiscountController;
@@ -75,6 +76,7 @@ Auth::routes();
 Route::post('/request-otp', [AuthController::class, 'requestOtp'])->name('sendotp');
 Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])->name('verifyotp');
 Route::post('/getdistricts', [Controller::class, 'getdistricts'])->name('getdistricts');
+// Route::put('/customer/profile/{id}', [AuthController::class, 'update'])->name('customerProfile.update');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -90,13 +92,18 @@ Route::resource('testimonials', TestimonialsController::class);
 Route::resource('bannerimages', BannerimagesController::class);
 Route::resource('category', CategoryController::class);
 Route::resource('faq', FaqController::class);
-Route::get('/profile', [ProfileController::class, 'index'])->name('website.profile');
-Route::get('/profile', [ProfileController::class, 'index'])->name('website.profile');
+// Route::get('/profile', [ProfileController::class, 'index'])->name('website.profile');
+// Route::get('/profile', [ProfileController::class, 'index'])->name('website.profile');
 
 Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
 Route::post('/favorite/toggle/{park_id}', [FavoriteController::class, 'addFavorite'])->name('favorite.toggle');
 Route::post('/favorite/remove/{park_id}', [FavoriteController::class, 'removeFavorite'])->name('favorite.remove');
 
+
+Route::middleware("auth")->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('website.profile');
+    Route::put('/customer/profile/{id}', [AuthController::class, 'update'])->name('customerProfile.update');
+});
 
 
 Route::prefix('admin')->middleware('auth')->group(function () {
@@ -140,9 +147,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('customers', [AuthController::class, 'customers'])->name('admin.customers');
     Route::get('customers/{wallet_id}/wallet', [AuthController::class, 'walletHistory'])->name('admin.customers.walletHistory');
     Route::delete('customers/{user}/delete', [AuthController::class, 'destroy'])->name('admin.customers.destroy');
-    
-
-
 
 
     Route::resource('parks', ParkController::class);
@@ -150,7 +154,13 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('bannerimages', BannerimagesController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('faq', FaqController::class);
-    Route::get('/profile', [ProfileController::class, 'index'])->name('website.profile');
+    // Route::get('/profile', [ProfileController::class, 'index'])->name('website.profile');
+
+    // booking
+    Route::post('booking/checkout', [BookingController::class, 'bookingCheckout'])->name('booking.checkout');
+    Route::get('booking/{orderId}/checkout', [HomeController::class, 'CheckoutFun'])->name("booking.payment");
+    Route::post('booking/{orderId}/complete', [BookingController::class, 'completeBooking'])->name('booking.complete');
+    Route::get('ticket-booking', [BookingController::class, 'bookingList']);
 
 
     // staff
